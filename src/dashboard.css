@@ -1,0 +1,133 @@
+/* Full WhatsApp container */
+.whatsapp-container {
+  display: flex;
+  height: 90vh;
+  max-width: 1200px;
+  margin: 2rem auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Sidebar / Users list */
+.sidebar {
+  width: 300px;
+  background-color: #f0f2f5;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+/* Sidebar header */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ededed;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-header h2 {
+  font-size: 1.2rem;
+}
+
+.sidebar-header button {
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.sidebar-header button:hover {
+  background-color: #d9363e;
+}
+
+/* Info card in sidebar */
+.info-card {
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 1rem;
+  background-color: #d9f0f7;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Users list */
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.user-list-item.active,
+.user-list-item:hover {
+  background-color: #e6f3ff;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 0.8rem;
+}
+
+.user-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.email {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.role {
+  font-size: 0.75rem;
+  color: #007bff;
+}
+
+/* Chat panel */
+.chat-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+}
+
+/* Empty chat placeholder */
+.empty-chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font-size: 1.2rem;
+  color: #888;
+}

@@ -1,56 +1,41 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { createSocketConnection } from "./socket";
+import Login from "./Login";
+import { UserContext, } from "./UserContext";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
+import Register from "./Register";
+import ChatScreen from "./ChatScreen";
+import ProtectedRoute from "./ProtectedRoute";
+import Dashboard from "./Dashboard";
 
 function App() {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const ws = useRef(null);
-
-  useEffect(() => {
-    // Connect to WebSocket server
-    ws.current = new WebSocket("ws://localhost:5000");
-
-    ws.current.onmessage = (event) => {
-      setMessages((prev) => [...prev, event.data]);
-    };
-
-    return () => {
-      ws.current.close();
-    };
-  }, []);
-
-  const sendMessage = () => {
-    if (input.trim() !== "") {
-      ws.current.send(input);
-      setInput("");
-    }
-  };
+  
+  const { loggedinUser, loading } = useContext(UserContext);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>💬 Chat App</h2>
-      <div
-        style={{
-          border: "1px solid gray",
-          height: "300px",
-          overflowY: "auto",
-          padding: 10,
-          marginBottom: 10,
-        }}
-      >
-        {messages.map((msg, i) => (
-          <div key={i}>{msg}</div>
-        ))}
-      </div>
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Type a message..."
-        style={{ width: "70%", padding: "8px" }}
-      />
-      <button onClick={sendMessage} style={{ padding: "8px 16px", marginLeft: 10 }}>
-        Send
-      </button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute loggedinUser={loggedinUser} loading={loading}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/chat/:to/:from"
+          element={
+            <ProtectedRoute loggedinUser={loggedinUser} loading={loading}>
+              <ChatScreen />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
